@@ -1,10 +1,12 @@
-import { useReducer } from "react";
+import { createContext, useReducer } from "react";
 import "./App.css";
 import Main from "./Components/Main";
 import WhatGender from "./Components/WhatGender";
 import HowMany from "./Components/HowMany";
 
-const initialState = { color: "blue" };
+export const myContext = createContext<any>("s");
+// useReducer
+const initialState = { backgroundColor: "#6efafc", litre: "2 L" };
 
 type ActionType = {
   type: string;
@@ -12,17 +14,50 @@ type ActionType = {
 };
 
 const reducer = (state: typeof initialState, action: ActionType) => {
-  const newState = { ...state };
+  const backgroundColor = { ...state };
+  const litre = { ...state };
   switch (action.type) {
     case "sky":
-      newState.color = action.payload;
-      return newState;
+      backgroundColor.backgroundColor = action.payload;
+      return backgroundColor;
+    case "lightBlue":
+      backgroundColor.backgroundColor = action.payload;
+      return backgroundColor;
+    case "blue":
+      backgroundColor.backgroundColor = action.payload;
+      return backgroundColor;
+    case "darkBlue":
+      backgroundColor.backgroundColor = action.payload;
+      return backgroundColor;
+      break;
     default:
-      throw new Error();
+      backgroundColor.backgroundColor = "#6efafc";
+      backgroundColor;
+      break;
+  }
+  switch (action.type) {
+    case "2 L":
+      litre.litre = action.payload;
+      return litre;
+    case "3 L":
+      litre.litre = action.payload;
+      return litre;
+    case "4 L":
+      litre.litre = action.payload;
+      return litre;
+    case "5 L":
+      litre.litre = action.payload;
+      return litre;
+      break;
+    default:
+      litre.litre = "2 L";
+      return litre;
+      break;
   }
 };
-
+// useReducer
 function App() {
+  // useReducer
   const [start, dispatch] = useReducer(reducer, initialState);
   const changeDispatch = (a: string, b: string) => {
     dispatch({
@@ -30,20 +65,27 @@ function App() {
       payload: b,
     });
   };
+  // useReducer
   return (
-    <div>
-      <HowMany />
-      <WhatGender />
-      <Main />
+    <myContext.Provider value={{ start, changeDispatch }}>
       <div
-        style={{ backgroundColor: start.color }}
-        onClick={() => {
-          changeDispatch("sky", "#70f1ff");
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "white",
+          backgroundColor: start.backgroundColor,
         }}
       >
-        grger
+        <HowMany />
+        <WhatGender />
+        <Main />
       </div>
-    </div>
+    </myContext.Provider>
   );
 }
 
