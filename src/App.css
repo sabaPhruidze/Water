@@ -1,6 +1,11 @@
+@font-face {
+    font-family: OpenSans;
+    src: url(./assets/openSans/OpenSans-Bold.ttf);
+}
 * {
     margin:0;
     padding: 0;
     box-sizing: border-box;
     color: white;
+    font-family: OpenSans;
 }

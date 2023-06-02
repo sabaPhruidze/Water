@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
+import o from "../assets/button/o-solid.svg";
+import x from "../assets/button/x-solid.svg";
+
 export default function HowMany() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
@@ -49,6 +52,18 @@ export default function HowMany() {
       payload: "5 L",
     },
   ];
+  const buttonData = [
+    {
+      img: o,
+      className: Common.buttonO,
+      onClick: () => changeDispatch("thirdPage", "thirdPage"),
+    },
+    {
+      img: x,
+      className: Common.buttonX,
+      onClick: () => changeDispatch("secondPage", "secondPage"),
+    },
+  ];
   type inputDataType = {
     context: string;
     id: string;
@@ -56,7 +71,7 @@ export default function HowMany() {
     payload: string;
   };
   const handleSubmit = (e: any) => {
-    e.prevetDefault();
+    e.preventDefault();
   };
   return (
     <div
@@ -89,6 +104,18 @@ export default function HowMany() {
             </div>
           ))}
         </form>
+        <div className={`${Common.buttonSize} ${Common.dFlex}`}>
+          {buttonData.map((data: any, idx: number) => (
+            <img
+              src={data.img}
+              alt="button"
+              key={idx}
+              className={data.className}
+              style={{ cursor: "pointer" }}
+              onClick={data.onClick}
+            />
+          ))}
+        </div>
       </div>
       <div className={Common.bgcChanger}>
         {bgcData.map((data: any, idx: number) => (

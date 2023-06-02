@@ -6,7 +6,11 @@ import HowMany from "./Components/HowMany";
 
 export const myContext = createContext<any>("s");
 // useReducer
-const initialState = { backgroundColor: "#6efafc", litre: "2 L" };
+const initialState = {
+  backgroundColor: "#6efafc",
+  litre: "2 L",
+  page: "firstPage",
+};
 
 type ActionType = {
   type: string;
@@ -14,46 +18,32 @@ type ActionType = {
 };
 
 const reducer = (state: typeof initialState, action: ActionType) => {
-  const backgroundColor = { ...state };
-  const litre = { ...state };
+  const changes = { ...state };
   switch (action.type) {
     case "sky":
-      backgroundColor.backgroundColor = action.payload;
-      return backgroundColor;
     case "lightBlue":
-      backgroundColor.backgroundColor = action.payload;
-      return backgroundColor;
     case "blue":
-      backgroundColor.backgroundColor = action.payload;
-      return backgroundColor;
     case "darkBlue":
-      backgroundColor.backgroundColor = action.payload;
-      return backgroundColor;
+      changes.backgroundColor = action.payload;
       break;
-    default:
-      backgroundColor.backgroundColor = "#6efafc";
-      backgroundColor;
-      break;
-  }
-  switch (action.type) {
     case "2 L":
-      litre.litre = action.payload;
-      return litre;
     case "3 L":
-      litre.litre = action.payload;
-      return litre;
     case "4 L":
-      litre.litre = action.payload;
-      return litre;
     case "5 L":
-      litre.litre = action.payload;
-      return litre;
+      changes.litre = action.payload;
+      break;
+    case "firstPage":
+    case "secondPage":
+    case "thirdPage":
+      changes.page = action.payload;
       break;
     default:
-      litre.litre = "2 L";
-      return litre;
+      changes.backgroundColor = "#6efafc";
+      changes.litre = "2 L";
+      changes.page = "firstPage";
       break;
   }
+  return changes;
 };
 // useReducer
 function App() {
@@ -66,6 +56,33 @@ function App() {
     });
   };
   // useReducer
+  function Page() {
+    switch (start.page) {
+      case "firstPage":
+        return (
+          <>
+            <HowMany />
+            <Main />
+          </>
+        );
+        break;
+      case "secondPage":
+        return (
+          <>
+            <WhatGender />
+            <Main />
+          </>
+        );
+        break;
+      case "thirdPage":
+        return (
+          <>
+            <Main />
+          </>
+        );
+        break;
+    }
+  }
   return (
     <myContext.Provider value={{ start, changeDispatch }}>
       <div
@@ -81,9 +98,7 @@ function App() {
           backgroundColor: start.backgroundColor,
         }}
       >
-        <HowMany />
-        <WhatGender />
-        <Main />
+        {Page()}
       </div>
     </myContext.Provider>
   );
