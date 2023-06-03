@@ -11,19 +11,23 @@ export default function HowMany() {
   const bgcData = [
     {
       type: "sky",
-      payload: "#6efafc",
+      payload: "#1aa9d0",
     },
     {
       type: "lightBlue",
-      payload: "#2bc6c3",
+      payload: "#2488d5",
     },
     {
       type: "blue",
-      payload: "#1000ed",
+      payload: "#3669d5",
     },
     {
       type: "darkBlue",
-      payload: "#08043b",
+      payload: "#2140a3",
+    },
+    {
+      type: "deepBlue",
+      payload: "#161f6f",
     },
   ];
   const inputData = [
@@ -79,7 +83,9 @@ export default function HowMany() {
       style={{ backgroundColor: start.backgroundColor }}
     >
       <div className={Common.body}>
-        <h2>How many litres would you like to drink?</h2>
+        <h2 style={{ border: "3px solid white", borderRadius: 50 }}>
+          How many litres would you like to drink?
+        </h2>
         <form
           action=""
           method="post"

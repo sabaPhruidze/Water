@@ -7,7 +7,7 @@ import HowMany from "./Components/HowMany";
 export const myContext = createContext<any>("s");
 // useReducer
 const initialState = {
-  backgroundColor: "#6efafc",
+  backgroundColor: "#161f6f",
   litre: "2 L",
   page: "firstPage",
 };
@@ -24,6 +24,7 @@ const reducer = (state: typeof initialState, action: ActionType) => {
     case "lightBlue":
     case "blue":
     case "darkBlue":
+    case "deepBlue":
       changes.backgroundColor = action.payload;
       break;
     case "2 L":
@@ -98,7 +99,24 @@ function App() {
           backgroundColor: start.backgroundColor,
         }}
       >
-        {Page()}
+        <div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            color: "white",
+            backgroundColor:
+              start.page === "firstPage" || start.page === "secondPage"
+                ? "rgb(0, 0, 0, 0.6)"
+                : start.backgroundColor,
+          }}
+        >
+          {Page()}
+        </div>
       </div>
     </myContext.Provider>
   );
