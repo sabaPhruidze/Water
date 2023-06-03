@@ -14,6 +14,7 @@ export default function Main() {
       }}
     >
       {start.litre}
+      {start.gender}
     </div>
   );
 }

@@ -10,6 +10,7 @@ const initialState = {
   backgroundColor: "#161f6f",
   litre: "2 L",
   page: "firstPage",
+  gender: "man",
 };
 
 type ActionType = {
@@ -37,6 +38,10 @@ const reducer = (state: typeof initialState, action: ActionType) => {
     case "secondPage":
     case "thirdPage":
       changes.page = action.payload;
+      break;
+    case "man":
+    case "woman":
+      changes.gender = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";
