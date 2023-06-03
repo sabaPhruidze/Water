@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
+import Main from "./Main";
+import WhatGender from "./WhatGender";
 
 import o from "../assets/button/o-solid.svg";
 import x from "../assets/button/x-solid.svg";
@@ -60,12 +62,25 @@ export default function HowMany() {
     {
       img: o,
       className: Common.buttonO,
-      onClick: () => changeDispatch("thirdPage", "thirdPage"),
+      onClick: () =>
+        changeDispatch(
+          "thirdPage",
+          <>
+            <Main />
+          </>
+        ),
     },
     {
       img: x,
       className: Common.buttonX,
-      onClick: () => changeDispatch("secondPage", "secondPage"),
+      onClick: () =>
+        changeDispatch(
+          "secondPage",
+          <>
+            <WhatGender />
+            <Main />
+          </>
+        ),
     },
   ];
   type inputDataType = {

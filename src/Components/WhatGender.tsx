@@ -3,7 +3,7 @@ import { myContext } from "../App";
 import Common from "./Common.module.css";
 
 import o from "../assets/button/o-solid.svg";
-
+import Main from "./Main";
 export default function WhatGender() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
@@ -47,7 +47,13 @@ export default function WhatGender() {
     {
       img: o,
       className: Common.buttonO,
-      onClick: () => changeDispatch("thirdPage", "thirdPage"),
+      onClick: () =>
+        changeDispatch(
+          "thirdPage",
+          <>
+            <Main />
+          </>
+        ),
     },
   ];
   type inputDataType = {

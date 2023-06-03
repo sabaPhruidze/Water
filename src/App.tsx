@@ -9,16 +9,19 @@ export const myContext = createContext<any>("s");
 const initialState = {
   backgroundColor: "#161f6f",
   litre: "2 L",
-  page: "firstPage",
+  page: (
+    <>
+      <HowMany />
+      <Main />
+    </>
+  ),
   gender: "man",
 };
-
 type ActionType = {
   type: string;
   payload: string;
 };
-
-const reducer = (state: typeof initialState, action: ActionType) => {
+const reducer = (state: any, action: ActionType) => {
   const changes = { ...state };
   switch (action.type) {
     case "sky":
@@ -55,40 +58,13 @@ const reducer = (state: typeof initialState, action: ActionType) => {
 function App() {
   // useReducer
   const [start, dispatch] = useReducer(reducer, initialState);
-  const changeDispatch = (a: string, b: string) => {
+  const changeDispatch = (a: string, b: any) => {
     dispatch({
       type: a,
       payload: b,
     });
   };
   // useReducer
-  function Page() {
-    switch (start.page) {
-      case "firstPage":
-        return (
-          <>
-            <HowMany />
-            <Main />
-          </>
-        );
-        break;
-      case "secondPage":
-        return (
-          <>
-            <WhatGender />
-            <Main />
-          </>
-        );
-        break;
-      case "thirdPage":
-        return (
-          <>
-            <Main />
-          </>
-        );
-        break;
-    }
-  }
   return (
     <myContext.Provider value={{ start, changeDispatch }}>
       <div
@@ -114,13 +90,12 @@ function App() {
             alignItems: "center",
             textAlign: "center",
             color: "white",
-            backgroundColor:
-              start.page === "firstPage" || start.page === "secondPage"
-                ? "rgb(0, 0, 0, 0.6)"
-                : start.backgroundColor,
+            backgroundColor: !(<Main />)
+              ? start.backgroundColor
+              : "rgb(0, 0, 0, 0.6)",
           }}
         >
-          {Page()}
+          {start.page}
         </div>
       </div>
     </myContext.Provider>
