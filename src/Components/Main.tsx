@@ -22,7 +22,7 @@ export default function Main() {
   };
 
   const isCupFilled = (data: number) => {
-    return filledCups.includes(data);
+    return filledCups.includes(data); // I now have an individual small cup which I clicked
   };
 
   return (
