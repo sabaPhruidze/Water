@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
@@ -77,6 +77,9 @@ export default function HowMany() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
+  useEffect(() => {
+    changeDispatch("liter", "liter");
+  }, []);
   return (
     <div
       className={Common.container}

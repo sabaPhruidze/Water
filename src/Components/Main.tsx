@@ -8,7 +8,10 @@ export default function Main() {
   return (
     <div>
       <h1>See how many waters You drinked</h1>
-      <h3>Goal: {start.page}</h3>
+      <h3>Goal: {start.which === "liter" ? start.litre : start.gender}iter</h3>
+      <div>
+        <h3>{start.which === "liter" ? start.litre : start.gender}iter</h3>
+      </div>
     </div>
   );
 }

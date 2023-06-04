@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
@@ -59,6 +59,9 @@ export default function WhatGender() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
+  useEffect(() => {
+    changeDispatch("gender", "gender");
+  }, []);
   return (
     <div
       className={Common.container}

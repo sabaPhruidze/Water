@@ -10,12 +10,14 @@ type InitialState = {
   litre: string;
   page: string;
   gender: string;
+  which: string;
 };
 const initialState: InitialState = {
   backgroundColor: "#161f6f",
   litre: "2 L",
   page: "firstPage",
   gender: "man",
+  which: "liter",
 };
 type ActionType = {
   type: string;
@@ -45,6 +47,10 @@ const reducer = (state: any, action: ActionType) => {
     case "man":
     case "woman":
       changes.gender = action.payload;
+      break;
+    case "gender":
+    case "liter":
+      changes.which = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";
