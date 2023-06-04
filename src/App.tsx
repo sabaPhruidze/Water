@@ -1,20 +1,20 @@
 import { createContext, useReducer } from "react";
 import "./App.css";
 import Main from "./Components/Main";
-import WhatGender from "./Components/WhatGender";
 import HowMany from "./Components/HowMany";
-
+import WhatGender from "./Components/WhatGender";
 export const myContext = createContext<any>("s");
 // useReducer
-const initialState = {
+type InitialState = {
+  backgroundColor: string;
+  litre: string;
+  page: string;
+  gender: string;
+};
+const initialState: InitialState = {
   backgroundColor: "#161f6f",
   litre: "2 L",
-  page: (
-    <>
-      <HowMany />
-      <Main />
-    </>
-  ),
+  page: "firstPage",
   gender: "man",
 };
 type ActionType = {
@@ -40,7 +40,7 @@ const reducer = (state: any, action: ActionType) => {
     case "firstPage":
     case "secondPage":
     case "thirdPage":
-      changes.page = action.payload;
+      changes.page = action.type;
       break;
     case "man":
     case "woman":
@@ -64,6 +64,31 @@ function App() {
       payload: b,
     });
   };
+  function whichPage() {
+    switch (start.page) {
+      case "firstPage":
+        return (
+          <>
+            <HowMany />
+            <Main />
+          </>
+        );
+      case "secondPage":
+        return (
+          <>
+            <WhatGender />
+            <Main />
+          </>
+        );
+      case "thirdPage":
+        return (
+          <>
+            <Main />
+          </>
+        );
+        break;
+    }
+  }
   // useReducer
   return (
     <myContext.Provider value={{ start, changeDispatch }}>
@@ -90,12 +115,13 @@ function App() {
             alignItems: "center",
             textAlign: "center",
             color: "white",
-            backgroundColor: !(<Main />)
-              ? start.backgroundColor
-              : "rgb(0, 0, 0, 0.6)",
+            backgroundColor:
+              start.page === "thirdPage"
+                ? start.backgroundColor
+                : "rgb(0, 0, 0, 0.6)",
           }}
         >
-          {start.page}
+          {whichPage()}
         </div>
       </div>
     </myContext.Provider>

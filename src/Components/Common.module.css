@@ -41,7 +41,7 @@ transform: scale(0.95);
     justify-content:space-around;
 }
 .bgcChanger {
-    padding-top: 8px;
+    padding-top: 10px;
     width:45px;
     display: flex;
     flex-direction: column;
