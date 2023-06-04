@@ -17,7 +17,10 @@
     flex-direction: row;
     border: 5px solid rgb(255, 255, 255);
     border-radius: 30px;
-   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .MainContainer {
     display: flex;
@@ -80,4 +83,12 @@ h1,h2,h3,h4,h5,h6 {
 }
 .bigCupContainer h3,.bigCupContainer h4 {
     color: black;
+}
+.bgColor {
+    margin-bottom: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
 }

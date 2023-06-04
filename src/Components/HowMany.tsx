@@ -86,10 +86,6 @@ export default function HowMany() {
         className={Common.container}
         style={{
           backgroundColor: start.backgroundColor,
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
         }}
       >
         <div className={Common.body}>
@@ -147,14 +143,9 @@ export default function HowMany() {
               }}
               key={idx}
               style={{
-                width: 30,
-                height: 30,
-                borderRadius: "50%",
-                border: "2px solid white",
                 backgroundColor: data.payload,
-                cursor: "pointer",
-                marginBottom: 16,
               }}
+              className={Common.bgColor}
             ></div>
           ))}
         </div>
