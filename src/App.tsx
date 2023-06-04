@@ -100,35 +100,11 @@ function App() {
     <myContext.Provider value={{ start, changeDispatch }}>
       <div
         style={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          color: "white",
           backgroundColor: start.backgroundColor,
         }}
+        className="fullyContainered"
       >
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            color: "white",
-            backgroundColor:
-              start.page === "thirdPage"
-                ? start.backgroundColor
-                : "rgb(0, 0, 0, 0.6)",
-          }}
-        >
-          {whichPage()}
-        </div>
+        {whichPage()}
       </div>
     </myContext.Provider>
   );

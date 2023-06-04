@@ -9,3 +9,13 @@
     color: white;
     font-family: OpenSans;
 }
+.fullyContainered {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}

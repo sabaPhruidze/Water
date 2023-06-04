@@ -81,69 +81,83 @@ export default function HowMany() {
     changeDispatch("liter", "liter");
   }, []);
   return (
-    <div
-      className={Common.container}
-      style={{ backgroundColor: start.backgroundColor }}
-    >
-      <div className={Common.body}>
-        <h2 style={{ border: "3px solid white", borderRadius: 50 }}>
-          How many litres would you like to drink?
-        </h2>
-        <form
-          action=""
-          method="post"
-          onSubmit={handleSubmit}
-          className={Common.inputContainer}
-        >
-          {inputData.map((data: inputDataType, idx: number) => (
-            <div key={idx}>
-              <input
-                type="radio"
-                id={data.id}
-                name="how many"
-                style={{ height: 18, cursor: "pointer" }}
-                onClick={() => {
-                  changeDispatch(data.type, data.payload);
-                }}
+    <div className={Common.fullyContainered}>
+      <div
+        className={Common.container}
+        style={{
+          backgroundColor: start.backgroundColor,
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <div className={Common.body}>
+          <h2
+            style={{
+              border: "3px solid white",
+              borderRadius: 30,
+              padding: "2px 5px 2px 5px",
+            }}
+          >
+            How many litres would you like to drink?
+          </h2>
+          <form
+            action=""
+            method="post"
+            onSubmit={handleSubmit}
+            className={Common.inputContainer}
+          >
+            {inputData.map((data: inputDataType, idx: number) => (
+              <div key={idx}>
+                <input
+                  type="radio"
+                  id={data.id}
+                  name="how many"
+                  style={{ height: 18, cursor: "pointer" }}
+                  onClick={() => {
+                    changeDispatch(data.type, data.payload);
+                  }}
+                />
+                <label htmlFor={data.id} style={{ fontSize: 25 }}>
+                  {" "}
+                  {data.context}
+                </label>
+              </div>
+            ))}
+          </form>
+          <div className={`${Common.buttonSize} ${Common.dFlex}`}>
+            {buttonData.map((data: any, idx: number) => (
+              <img
+                src={data.img}
+                alt="button"
+                key={idx}
+                className={data.className}
+                style={{ cursor: "pointer" }}
+                onClick={data.onClick}
               />
-              <label htmlFor={data.id} style={{ fontSize: 25 }}>
-                {" "}
-                {data.context}
-              </label>
-            </div>
-          ))}
-        </form>
-        <div className={`${Common.buttonSize} ${Common.dFlex}`}>
-          {buttonData.map((data: any, idx: number) => (
-            <img
-              src={data.img}
-              alt="button"
+            ))}
+          </div>
+        </div>
+        <div className={Common.bgcChanger}>
+          {bgcData.map((data: any, idx: number) => (
+            <div
+              onClick={() => {
+                changeDispatch(data.type, data.payload);
+              }}
               key={idx}
-              className={data.className}
-              style={{ cursor: "pointer" }}
-              onClick={data.onClick}
-            />
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
+                border: "2px solid white",
+                backgroundColor: data.payload,
+                cursor: "pointer",
+                marginBottom: 16,
+              }}
+            ></div>
           ))}
         </div>
-      </div>
-      <div className={Common.bgcChanger}>
-        {bgcData.map((data: any, idx: number) => (
-          <div
-            onClick={() => {
-              changeDispatch(data.type, data.payload);
-            }}
-            key={idx}
-            style={{
-              width: 30,
-              height: 30,
-              borderRadius: "50%",
-              border: "2px solid white",
-              backgroundColor: data.payload,
-              cursor: "pointer",
-              marginBottom: 16,
-            }}
-          ></div>
-        ))}
       </div>
     </div>
   );
