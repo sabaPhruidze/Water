@@ -11,6 +11,11 @@ type InitialState = {
   page: string;
   gender: string;
   which: string;
+  smallCupChanger: boolean;
+};
+type ActionType = {
+  type: string | boolean;
+  payload: string | boolean;
 };
 const initialState: InitialState = {
   backgroundColor: "#161f6f",
@@ -18,11 +23,9 @@ const initialState: InitialState = {
   page: "firstPage",
   gender: "man",
   which: "liter",
+  smallCupChanger: false,
 };
-type ActionType = {
-  type: string;
-  payload: string;
-};
+
 const reducer = (state: any, action: ActionType) => {
   const changes = { ...state };
   switch (action.type) {
@@ -51,6 +54,10 @@ const reducer = (state: any, action: ActionType) => {
     case "gender":
     case "liter":
       changes.which = action.payload;
+      break;
+    case "sCNotClicked": //small cup not clicked and clicked
+    case "sCClicked":
+      changes.smallCupChanger = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";
