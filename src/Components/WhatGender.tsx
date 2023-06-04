@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
+import Warning from "./Warning";
 
 import o from "../assets/button/o-solid.svg";
 
@@ -47,7 +48,12 @@ export default function WhatGender() {
     {
       img: o,
       className: Common.buttonO,
-      onClick: () => changeDispatch("thirdPage", "thirdPage"),
+      onClick: () => {
+        start.gender === ""
+          ? changeDispatch("showWarning", true)
+          : changeDispatch("thirdPage", "thirdPage");
+        changeDispatch("ifL", true);
+      },
     },
   ];
   type inputDataType = {
@@ -63,70 +69,77 @@ export default function WhatGender() {
     changeDispatch("gender", "gender");
   }, []);
   return (
-    <div className={Common.fullyContainered}>
-      <div
-        className={Common.container}
-        style={{ backgroundColor: start.backgroundColor }}
-      >
-        <div className={Common.body}>
-          <h2
-            style={{ border: "3px solid white", borderRadius: 50, padding: 10 }}
-          >
-            What is your gender?
-          </h2>
-          <form
-            action=""
-            method="post"
-            onSubmit={handleSubmit}
-            className={Common.inputContainer}
-            style={{ justifyContent: "space-around" }}
-          >
-            {inputData.map((data: inputDataType, idx: number) => (
-              <div key={idx}>
-                <input
-                  type="radio"
-                  id={data.id}
-                  name="gender"
-                  style={{ height: 18, cursor: "pointer" }}
-                  onClick={() => {
-                    changeDispatch(data.type, data.payload);
-                  }}
+    <>
+      {start.showWarning ? <Warning /> : ""}
+      <div className={Common.fullyContainered}>
+        <div
+          className={Common.container}
+          style={{ backgroundColor: start.backgroundColor }}
+        >
+          <div className={Common.body}>
+            <h2
+              style={{
+                border: "3px solid white",
+                borderRadius: 50,
+                padding: 10,
+              }}
+            >
+              What is your gender?
+            </h2>
+            <form
+              action=""
+              method="post"
+              onSubmit={handleSubmit}
+              className={Common.inputContainer}
+              style={{ justifyContent: "space-around" }}
+            >
+              {inputData.map((data: inputDataType, idx: number) => (
+                <div key={idx}>
+                  <input
+                    type="radio"
+                    id={data.id}
+                    name="gender"
+                    style={{ height: 18, cursor: "pointer" }}
+                    onClick={() => {
+                      changeDispatch(data.type, data.payload);
+                    }}
+                  />
+                  <label htmlFor={data.id} style={{ fontSize: 25 }}>
+                    {" "}
+                    {data.context}
+                  </label>
+                </div>
+              ))}
+            </form>
+            <div className={`${Common.buttonSize} ${Common.dFlex}`}>
+              {buttonData.map((data: any, idx: number) => (
+                <img
+                  src={data.img}
+                  alt="button"
+                  key={idx}
+                  className={data.className}
+                  style={{ cursor: "pointer" }}
+                  onClick={data.onClick}
                 />
-                <label htmlFor={data.id} style={{ fontSize: 25 }}>
-                  {" "}
-                  {data.context}
-                </label>
-              </div>
-            ))}
-          </form>
-          <div className={`${Common.buttonSize} ${Common.dFlex}`}>
-            {buttonData.map((data: any, idx: number) => (
-              <img
-                src={data.img}
-                alt="button"
+              ))}
+            </div>
+          </div>
+          <div className={Common.bgcChanger}>
+            {bgcData.map((data: any, idx: number) => (
+              <div
+                onClick={() => {
+                  changeDispatch(data.type, data.payload);
+                }}
+                className={Common.bgColor}
                 key={idx}
-                className={data.className}
-                style={{ cursor: "pointer" }}
-                onClick={data.onClick}
-              />
+                style={{
+                  backgroundColor: data.payload,
+                }}
+              ></div>
             ))}
           </div>
         </div>
-        <div className={Common.bgcChanger}>
-          {bgcData.map((data: any, idx: number) => (
-            <div
-              onClick={() => {
-                changeDispatch(data.type, data.payload);
-              }}
-              className={Common.bgColor}
-              key={idx}
-              style={{
-                backgroundColor: data.payload,
-              }}
-            ></div>
-          ))}
-        </div>
       </div>
-    </div>
+    </>
   );
 }

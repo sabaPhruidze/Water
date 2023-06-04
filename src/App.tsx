@@ -8,10 +8,12 @@ export const myContext = createContext<any>("s");
 type InitialState = {
   backgroundColor: string;
   litre: string;
+  ifL: boolean;
   page: string;
   gender: string;
   which: string;
   smallCupChanger: boolean;
+  showWarning: boolean;
 };
 type ActionType = {
   type: string | boolean;
@@ -19,11 +21,13 @@ type ActionType = {
 };
 const initialState: InitialState = {
   backgroundColor: "#161f6f",
-  litre: "2 L",
+  litre: "L",
+  ifL: false,
   page: "firstPage",
-  gender: "man",
+  gender: "",
   which: "liter",
   smallCupChanger: false,
+  showWarning: false,
 };
 
 const reducer = (state: any, action: ActionType) => {
@@ -58,6 +62,13 @@ const reducer = (state: any, action: ActionType) => {
     case "sCNotClicked": //small cup not clicked and clicked
     case "sCClicked":
       changes.smallCupChanger = action.payload;
+      break;
+    case "showWarning":
+      changes.showWarning = action.payload;
+      break;
+    case "ifL":
+    case "ifNotL":
+      changes.ifL = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";

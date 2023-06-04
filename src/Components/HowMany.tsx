@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { myContext } from "../App";
+import Warning from "./Warning";
 import Common from "./Common.module.css";
 
 import o from "../assets/button/o-solid.svg";
@@ -60,7 +61,12 @@ export default function HowMany() {
     {
       img: o,
       className: Common.buttonO,
-      onClick: () => changeDispatch("thirdPage", "thirdPage"),
+      onClick: () => {
+        start.litre === "L"
+          ? changeDispatch("showWarning", true)
+          : changeDispatch("thirdPage", "thirdPage");
+        changeDispatch("ifNotL", false);
+      },
     },
     {
       img: x,
@@ -81,75 +87,78 @@ export default function HowMany() {
     changeDispatch("liter", "liter");
   }, []);
   return (
-    <div className={Common.fullyContainered}>
-      <div
-        className={Common.container}
-        style={{
-          backgroundColor: start.backgroundColor,
-        }}
-      >
-        <div className={Common.body}>
-          <h2
-            style={{
-              border: "3px solid white",
-              borderRadius: 30,
-              padding: "2px 5px 2px 5px",
-            }}
-          >
-            How many litres would you like to drink?
-          </h2>
-          <form
-            action=""
-            method="post"
-            onSubmit={handleSubmit}
-            className={Common.inputContainer}
-          >
-            {inputData.map((data: inputDataType, idx: number) => (
-              <div key={idx}>
-                <input
-                  type="radio"
-                  id={data.id}
-                  name="how many"
-                  style={{ height: 18, cursor: "pointer" }}
-                  onClick={() => {
-                    changeDispatch(data.type, data.payload);
-                  }}
+    <>
+      {start.showWarning ? <Warning /> : ""}
+      <div className={Common.fullyContainered}>
+        <div
+          className={Common.container}
+          style={{
+            backgroundColor: start.backgroundColor,
+          }}
+        >
+          <div className={Common.body}>
+            <h2
+              style={{
+                border: "3px solid white",
+                borderRadius: 30,
+                padding: "2px 5px 2px 5px",
+              }}
+            >
+              How many litres would you like to drink?
+            </h2>
+            <form
+              action=""
+              method="post"
+              onSubmit={handleSubmit}
+              className={Common.inputContainer}
+            >
+              {inputData.map((data: inputDataType, idx: number) => (
+                <div key={idx}>
+                  <input
+                    type="radio"
+                    id={data.id}
+                    name="how many"
+                    style={{ height: 18, cursor: "pointer" }}
+                    onClick={() => {
+                      changeDispatch(data.type, data.payload);
+                    }}
+                  />
+                  <label htmlFor={data.id} style={{ fontSize: 25 }}>
+                    {" "}
+                    {data.context}
+                  </label>
+                </div>
+              ))}
+            </form>
+            <div className={`${Common.buttonSize} ${Common.dFlex}`}>
+              {buttonData.map((data: any, idx: number) => (
+                <img
+                  src={data.img}
+                  alt="button"
+                  key={idx}
+                  className={data.className}
+                  style={{ cursor: "pointer" }}
+                  onClick={data.onClick}
                 />
-                <label htmlFor={data.id} style={{ fontSize: 25 }}>
-                  {" "}
-                  {data.context}
-                </label>
-              </div>
-            ))}
-          </form>
-          <div className={`${Common.buttonSize} ${Common.dFlex}`}>
-            {buttonData.map((data: any, idx: number) => (
-              <img
-                src={data.img}
-                alt="button"
+              ))}
+            </div>
+          </div>
+          <div className={Common.bgcChanger}>
+            {bgcData.map((data: any, idx: number) => (
+              <div
+                onClick={() => {
+                  changeDispatch(data.type, data.payload);
+                }}
                 key={idx}
-                className={data.className}
-                style={{ cursor: "pointer" }}
-                onClick={data.onClick}
-              />
+                style={{
+                  backgroundColor: data.payload,
+                }}
+                className={Common.bgColor}
+              ></div>
             ))}
           </div>
         </div>
-        <div className={Common.bgcChanger}>
-          {bgcData.map((data: any, idx: number) => (
-            <div
-              onClick={() => {
-                changeDispatch(data.type, data.payload);
-              }}
-              key={idx}
-              style={{
-                backgroundColor: data.payload,
-              }}
-              className={Common.bgColor}
-            ></div>
-          ))}
-        </div>
       </div>
-    </div>
+    </>
   );
 }
