@@ -123,7 +123,10 @@ export default function HowMany() {
                       changeDispatch(data.type, data.payload);
                     }}
                   />
-                  <label htmlFor={data.id} style={{ fontSize: 25 }}>
+                  <label
+                    htmlFor={data.id}
+                    style={{ fontSize: 25, cursor: "pointer" }}
+                  >
                     {" "}
                     {data.context}
                   </label>
