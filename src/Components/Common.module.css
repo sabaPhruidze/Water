@@ -131,11 +131,31 @@ h3 {
     border-top: 0;
     color: #000c4a;
     background-color: #fff;
-    
     margin: 20px 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+.remain {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    transition: 0.5s ease;
+  
+}
+.remain h3, .remain h4 {
+    color:#000623;
+}
+.percent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #439de7;
+    font-weight: 800;
+    transition: 0.8 ease-in;
 }
 .glasses {
     display: flex;
@@ -143,9 +163,15 @@ h3 {
     justify-content: center;
     align-items: center;
 }
+.full {
+    background-color: #439de7;
+    color: #fff;
+  }
 .glass {
     width: 60px;
     height: 100px;
+    border:3px solid #000623;
+    border-top:0;
     border-radius: 0 0 20px 20px;
     background-color: rgba(255, 255, 255, 0.9568627451);
     cursor: pointer;
@@ -156,7 +182,6 @@ h3 {
     transition: 0.5;
     margin: 10px;
 }
-
 .ML200 {
     width:25px;
     height:45px;
