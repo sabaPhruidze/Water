@@ -6,7 +6,10 @@ export default function Warning() {
   const { start, changeDispatch } = myContext1;
   return (
     <div className={Common.WarningContainered}>
-      <div className={Common.warningContainer}>
+      <div
+        className={Common.warningContainer}
+        style={{ backgroundColor: start.backgroundColor }}
+      >
         <h4>
           {start.ifL === false
             ? "Choose one of them or click 'X' to determine appropriate liter according to your gender"

@@ -7,6 +7,11 @@ import o from "../assets/button/o-solid.svg";
 import x from "../assets/button/x-solid.svg";
 
 export default function HowMany() {
+  //types
+  type inputDataType = {
+    id: string;
+    type: number;
+  };
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
   const bgcData = [
@@ -31,7 +36,6 @@ export default function HowMany() {
       payload: "#161f6f",
     },
   ];
-  //
   const inputData = [
     {
       id: "choice 2 L",
@@ -57,20 +61,17 @@ export default function HowMany() {
       onClick: () => {
         start.litre === "L"
           ? changeDispatch("showWarning", true)
-          : changeDispatch("thirdPage", "thirdPage");
+          : changeDispatch("thirdPage");
         changeDispatch("ifNotL", false);
       },
     },
     {
       img: x,
       className: Common.buttonX,
-      onClick: () => changeDispatch("secondPage", "secondPage"),
+      onClick: () => changeDispatch("secondPage"),
     },
   ];
-  type inputDataType = {
-    id: string;
-    type: number;
-  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
