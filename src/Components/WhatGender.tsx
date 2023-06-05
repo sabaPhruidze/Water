@@ -53,7 +53,7 @@ export default function WhatGender() {
         start.gender === ""
           ? changeDispatch("showWarning", true)
           : changeDispatch("thirdPage");
-        changeDispatch("ifL", true);
+        changeDispatch("WarningAppeal", true);
       },
     },
   ];

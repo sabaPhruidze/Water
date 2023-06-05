@@ -62,7 +62,7 @@ export default function HowMany() {
         start.litre === "L"
           ? changeDispatch("showWarning", true)
           : changeDispatch("thirdPage");
-        changeDispatch("ifNotL", false);
+        changeDispatch("WarningAppeal", false);
       },
     },
     {

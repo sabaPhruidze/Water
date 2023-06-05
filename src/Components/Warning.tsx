@@ -11,7 +11,7 @@ export default function Warning() {
         style={{ backgroundColor: start.backgroundColor }}
       >
         <h4>
-          {start.ifL === false
+          {start.WarningAppeal === false
             ? "Choose one of them or click 'X' to determine appropriate liter according to your gender"
             : "Choose one gender"}
         </h4>

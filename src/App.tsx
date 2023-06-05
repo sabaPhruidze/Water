@@ -8,8 +8,8 @@ export const myContext = createContext<any>("s");
 // typescript
 type InitialState = {
   backgroundColor: string;
-  litre: string;
-  ifL: boolean;
+  litre: string | number;
+  WarningAppeal: boolean;
   page: string;
   gender: string;
   literOrGender: boolean;
@@ -25,12 +25,12 @@ type ActionType = {
 // useReducer
 const initialState: InitialState = {
   backgroundColor: "#161f6f",
-  litre: "L", // make number
-  ifL: false, // what it does
+  litre: "L",
+  WarningAppeal: false,
   page: "firstPage",
-  gender: "", // make it boolean
-  literOrGender: false, // what it does and boolean
-  smallCupChanger: false, //name change
+  gender: "",
+  literOrGender: false,
+  smallCupChanger: false,
   showWarning: false,
 };
 
@@ -62,16 +62,14 @@ const reducer = (state: any, action: ActionType) => {
     case "literOrGender":
       changes.literOrGender = action.payload;
       break;
-    case "sCNotClicked": //small cup not clicked and clicked
-    case "sCClicked": // uninportant
+    case "sCClicked": //small cup not clicked and clicked
       changes.smallCupChanger = action.payload;
       break;
     case "showWarning":
       changes.showWarning = action.payload;
       break;
-    case "ifL":
-    case "ifNotL": // uninportant
-      changes.ifL = action.payload;
+    case "WarningAppeal":
+      changes.WarningAppeal = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";
