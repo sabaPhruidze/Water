@@ -9,9 +9,9 @@ export const myContext = createContext<any>("s");
 type InitialState = {
   backgroundColor: string;
   litre: string | number;
-  WarningAppeal: boolean;
   page: string;
   gender: string;
+  WarningAppeal: boolean;
   literOrGender: boolean;
   smallCupChanger: boolean;
 };
@@ -25,13 +25,12 @@ type ActionType = {
 const initialState: InitialState = {
   backgroundColor: "#161f6f",
   litre: "L",
-  WarningAppeal: false,
   page: "firstPage",
   gender: "",
+  WarningAppeal: false,
   literOrGender: false,
   smallCupChanger: false,
 };
-
 const reducer = (state: any, action: ActionType) => {
   const changes = { ...state };
   switch (action.type) {
