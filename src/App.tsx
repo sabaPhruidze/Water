@@ -55,9 +55,9 @@ const reducer = (state: any, action: ActionType) => {
     case "thirdPage":
       changes.page = action.type;
       break;
-    case "man":
-    case "woman": // uninportant
-      changes.gender = action.payload;
+    case 3.7:
+    case 2.7: // uninportant
+      changes.gender = action.type;
       break;
     case "gender": // uninportant
     case "liter":

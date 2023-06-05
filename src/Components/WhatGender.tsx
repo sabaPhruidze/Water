@@ -6,6 +6,11 @@ import Warning from "./Warning";
 import o from "../assets/button/o-solid.svg";
 
 export default function WhatGender() {
+  type inputDataType = {
+    context: string;
+    type: number;
+  };
+
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
   const bgcData = [
@@ -33,15 +38,11 @@ export default function WhatGender() {
   const inputData = [
     {
       context: "Man",
-      id: "man",
-      type: "man",
-      payload: "3.7 L",
+      type: 3.7,
     },
     {
       context: "Woman",
-      id: "woman",
-      type: "woman",
-      payload: "2.7",
+      type: 2.7,
     },
   ];
   const buttonData = [
@@ -51,17 +52,11 @@ export default function WhatGender() {
       onClick: () => {
         start.gender === ""
           ? changeDispatch("showWarning", true)
-          : changeDispatch("thirdPage", "thirdPage");
+          : changeDispatch("thirdPage");
         changeDispatch("ifL", true);
       },
     },
   ];
-  type inputDataType = {
-    context: string;
-    id: string;
-    type: string;
-    payload: string;
-  };
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -97,15 +92,15 @@ export default function WhatGender() {
                 <div key={idx}>
                   <input
                     type="radio"
-                    id={data.id}
+                    id={data.context}
                     name="gender"
                     style={{ height: 18, cursor: "pointer" }}
                     onClick={() => {
-                      changeDispatch(data.type, data.payload);
+                      changeDispatch(data.type);
                     }}
                   />
                   <label
-                    htmlFor={data.id}
+                    htmlFor={data.context}
                     style={{ fontSize: 25, cursor: "pointer" }}
                   >
                     {" "}
