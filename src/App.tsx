@@ -12,7 +12,7 @@ type InitialState = {
   ifL: boolean;
   page: string;
   gender: string;
-  which: string;
+  literOrGender: boolean;
   smallCupChanger: boolean;
   showWarning: boolean;
 };
@@ -29,7 +29,7 @@ const initialState: InitialState = {
   ifL: false, // what it does
   page: "firstPage",
   gender: "", // make it boolean
-  which: "liter", // what it does and boolean
+  literOrGender: false, // what it does and boolean
   smallCupChanger: false, //name change
   showWarning: false,
 };
@@ -56,12 +56,11 @@ const reducer = (state: any, action: ActionType) => {
       changes.page = action.type;
       break;
     case 3.7:
-    case 2.7: // uninportant
+    case 2.7:
       changes.gender = action.type;
       break;
-    case "gender": // uninportant
-    case "liter":
-      changes.which = action.payload;
+    case "literOrGender":
+      changes.literOrGender = action.payload;
       break;
     case "sCNotClicked": //small cup not clicked and clicked
     case "sCClicked": // uninportant

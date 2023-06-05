@@ -32,7 +32,7 @@ export default function Main() {
       <div className={Common.bigCupContainer}>
         <div className={Common.waterInsideBigCupContainer}>
           <p style={{ fontSize: 20 }}>
-            {start.which === "liter" ? start.litre : start.gender}iter
+            {!start.literOrGender ? start.litre : start.gender}iter
           </p>
           <h4>Remained</h4>
         </div>

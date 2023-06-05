@@ -76,7 +76,7 @@ export default function HowMany() {
     e.preventDefault();
   };
   useEffect(() => {
-    changeDispatch("liter", "liter");
+    changeDispatch("literOrGender", false);
   }, []);
   return (
     <>

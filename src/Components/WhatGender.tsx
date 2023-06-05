@@ -61,7 +61,7 @@ export default function WhatGender() {
     e.preventDefault();
   };
   useEffect(() => {
-    changeDispatch("gender", "gender");
+    changeDispatch("literOrGender", true);
   }, []);
   return (
     <>
