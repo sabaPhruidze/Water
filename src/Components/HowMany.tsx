@@ -31,30 +31,23 @@ export default function HowMany() {
       payload: "#161f6f",
     },
   ];
+  //
   const inputData = [
     {
-      context: "2 L",
-      id: "choice1",
-      type: "2 L",
-      payload: "2 L",
+      id: "choice 2 L",
+      type: 2,
     },
     {
-      context: "3 L",
-      id: "choice2",
-      type: "3 L",
-      payload: "3 L",
+      id: "choice 3 L",
+      type: 3,
     },
     {
-      context: "4 L",
-      id: "choice3",
-      type: "4 L",
-      payload: "4 L",
+      id: "choice 4 L",
+      type: 4,
     },
     {
-      context: "5 L",
-      id: "choice4",
-      type: "5 L",
-      payload: "5 L",
+      id: "choice 5 L",
+      type: 5,
     },
   ];
   const buttonData = [
@@ -75,10 +68,8 @@ export default function HowMany() {
     },
   ];
   type inputDataType = {
-    context: string;
     id: string;
-    type: string;
-    payload: string;
+    type: number;
   };
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -120,7 +111,7 @@ export default function HowMany() {
                     name="how many"
                     style={{ height: 18, cursor: "pointer" }}
                     onClick={() => {
-                      changeDispatch(data.type, data.payload);
+                      changeDispatch(data.type);
                     }}
                   />
                   <label
@@ -128,7 +119,7 @@ export default function HowMany() {
                     style={{ fontSize: 25, cursor: "pointer" }}
                   >
                     {" "}
-                    {data.context}
+                    {data.type}
                   </label>
                 </div>
               ))}

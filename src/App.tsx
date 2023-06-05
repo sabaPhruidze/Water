@@ -4,7 +4,8 @@ import Main from "./Components/Main";
 import HowMany from "./Components/HowMany";
 import WhatGender from "./Components/WhatGender";
 export const myContext = createContext<any>("s");
-// useReducer
+
+// typescript
 type InitialState = {
   backgroundColor: string;
   litre: string;
@@ -16,17 +17,20 @@ type InitialState = {
   showWarning: boolean;
 };
 type ActionType = {
-  type: string | boolean;
-  payload: string | boolean;
+  type: string | boolean | number;
+  payload: string | boolean | number;
 };
+// typescript
+
+// useReducer
 const initialState: InitialState = {
   backgroundColor: "#161f6f",
-  litre: "L",
-  ifL: false,
+  litre: "L", // make number
+  ifL: false, // what it does
   page: "firstPage",
-  gender: "",
-  which: "liter",
-  smallCupChanger: false,
+  gender: "", // make it boolean
+  which: "liter", // what it does and boolean
+  smallCupChanger: false, //name change
   showWarning: false,
 };
 
@@ -40,11 +44,11 @@ const reducer = (state: any, action: ActionType) => {
     case "deepBlue":
       changes.backgroundColor = action.payload;
       break;
-    case "2 L":
-    case "3 L":
-    case "4 L":
-    case "5 L":
-      changes.litre = action.payload;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      changes.litre = action.type;
       break;
     case "firstPage":
     case "secondPage":
@@ -52,22 +56,22 @@ const reducer = (state: any, action: ActionType) => {
       changes.page = action.type;
       break;
     case "man":
-    case "woman":
+    case "woman": // uninportant
       changes.gender = action.payload;
       break;
-    case "gender":
+    case "gender": // uninportant
     case "liter":
       changes.which = action.payload;
       break;
     case "sCNotClicked": //small cup not clicked and clicked
-    case "sCClicked":
+    case "sCClicked": // uninportant
       changes.smallCupChanger = action.payload;
       break;
     case "showWarning":
       changes.showWarning = action.payload;
       break;
     case "ifL":
-    case "ifNotL":
+    case "ifNotL": // uninportant
       changes.ifL = action.payload;
       break;
     default:
@@ -82,7 +86,7 @@ const reducer = (state: any, action: ActionType) => {
 function App() {
   // useReducer
   const [start, dispatch] = useReducer(reducer, initialState);
-  const changeDispatch = (a: string, b: any) => {
+  const changeDispatch = (a: string, b?: any) => {
     dispatch({
       type: a,
       payload: b,
