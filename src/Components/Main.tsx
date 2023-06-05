@@ -1,10 +1,21 @@
-import { useContext, useState, useRef } from "react";
+import { useContext } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
 export default function Main() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
+
+  const handleClick = (number: number) => {
+    let updatedSmallCupChanger = [...start.smallCupChanger];
+    updatedSmallCupChanger[number] = !updatedSmallCupChanger[number];
+    changeDispatch("sCClicked", updatedSmallCupChanger);
+  };
+  const extraCupChange = () => {
+    let updatedExtraCupChanger = start.extraCup;
+    updatedExtraCupChanger = !updatedExtraCupChanger;
+    changeDispatch("extraCup", updatedExtraCupChanger);
+  };
   const dataSmallCups =
     start.litre === 2
       ? [0, 1, 2, 3]
@@ -20,7 +31,20 @@ export default function Main() {
 
   return (
     <>
-      {!start.literOrGender ? "" : <div className={Common.ML200}>200 ML</div>}
+      {!start.literOrGender ? (
+        ""
+      ) : (
+        <div
+          className={Common.ML200}
+          onClick={() => extraCupChange()}
+          style={{
+            backgroundColor: start.extraCup ? "blue" : "white",
+            color: start.extraCup ? "white" : "blue",
+          }}
+        >
+          200 ML
+        </div>
+      )}
       <div className={Common.MainContainer}>
         <h1>See how many waters You drank</h1>
         <h3>Goal: {!start.literOrGender ? start.litre : start.gender} liter</h3>
@@ -51,19 +75,22 @@ export default function Main() {
                 : start.litre === 5
                 ? "100vw"
                 : "100vw",
-          }} // by this logic if it is 2 then it will show 2/2 glasses ...
+          }}
         >
           {dataSmallCups.map((data: number, idx: number) => (
             <div
               className={`${Common.glass} ${Common.smallGlass}`}
               key={data}
               style={{
-                backgroundColor: "white",
-                color: "#439de7",
+                backgroundColor: start.smallCupChanger[idx] ? "blue" : "white",
+                color: start.smallCupChanger[idx] ? "white" : "blue",
                 display: "flex",
                 textAlign: "center",
                 justifyContent: "center",
                 alignItems: "center",
+              }}
+              onClick={() => {
+                handleClick(idx);
               }}
             >
               500 ML

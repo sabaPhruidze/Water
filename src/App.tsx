@@ -13,11 +13,12 @@ type InitialState = {
   gender: string;
   WarningAppeal: boolean;
   literOrGender: boolean;
-  smallCupChanger: boolean;
+  smallCupChanger: boolean[];
+  extraCup: boolean;
 };
 type ActionType = {
-  type: string | boolean | number;
-  payload: string | boolean | number;
+  type: string | boolean | number | boolean[];
+  payload: string | boolean | number | boolean[];
 };
 // typescript
 
@@ -29,7 +30,8 @@ const initialState: InitialState = {
   gender: "",
   WarningAppeal: false,
   literOrGender: false,
-  smallCupChanger: false,
+  smallCupChanger: [false, false, false, false],
+  extraCup: false,
 };
 const reducer = (state: any, action: ActionType) => {
   const changes = { ...state };
@@ -64,6 +66,9 @@ const reducer = (state: any, action: ActionType) => {
       break;
     case "WarningAppeal":
       changes.WarningAppeal = action.payload;
+      break;
+    case "extraCup":
+      changes.extraCup = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";
