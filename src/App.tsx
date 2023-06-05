@@ -14,7 +14,6 @@ type InitialState = {
   gender: string;
   literOrGender: boolean;
   smallCupChanger: boolean;
-  showWarning: boolean;
 };
 type ActionType = {
   type: string | boolean | number;
@@ -31,7 +30,6 @@ const initialState: InitialState = {
   gender: "",
   literOrGender: false,
   smallCupChanger: false,
-  showWarning: false,
 };
 
 const reducer = (state: any, action: ActionType) => {
@@ -64,9 +62,6 @@ const reducer = (state: any, action: ActionType) => {
       break;
     case "sCClicked": //small cup not clicked and clicked
       changes.smallCupChanger = action.payload;
-      break;
-    case "showWarning":
-      changes.showWarning = action.payload;
       break;
     case "WarningAppeal":
       changes.WarningAppeal = action.payload;

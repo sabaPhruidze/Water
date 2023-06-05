@@ -60,9 +60,8 @@ export default function HowMany() {
       className: Common.buttonO,
       onClick: () => {
         start.litre === "L"
-          ? changeDispatch("showWarning", true)
+          ? changeDispatch("WarningAppeal", true)
           : changeDispatch("thirdPage");
-        changeDispatch("WarningAppeal", false);
       },
     },
     {
@@ -80,7 +79,7 @@ export default function HowMany() {
   }, []);
   return (
     <>
-      {start.showWarning ? <Warning /> : ""}
+      {start.WarningAppeal ? <Warning /> : ""}
       <div className={Common.fullyContainered}>
         <div
           className={Common.container}

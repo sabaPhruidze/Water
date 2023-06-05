@@ -11,13 +11,13 @@ export default function Warning() {
         style={{ backgroundColor: start.backgroundColor }}
       >
         <h4>
-          {start.WarningAppeal === false
+          {start.page === "firstPage"
             ? "Choose one of them or click 'X' to determine appropriate liter according to your gender"
             : "Choose one gender"}
         </h4>
         <button
           onClick={() => {
-            changeDispatch("showWarning", false);
+            changeDispatch("WarningAppeal", false);
           }}
         >
           Click if you understood!

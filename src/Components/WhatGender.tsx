@@ -51,9 +51,8 @@ export default function WhatGender() {
       className: Common.buttonO,
       onClick: () => {
         start.gender === ""
-          ? changeDispatch("showWarning", true)
+          ? changeDispatch("WarningAppeal", true)
           : changeDispatch("thirdPage");
-        changeDispatch("WarningAppeal", true);
       },
     },
   ];
@@ -65,7 +64,7 @@ export default function WhatGender() {
   }, []);
   return (
     <>
-      {start.showWarning ? <Warning /> : ""}
+      {start.WarningAppeal ? <Warning /> : ""}
       <div className={Common.fullyContainered}>
         <div
           className={Common.container}
