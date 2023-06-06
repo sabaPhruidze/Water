@@ -6,7 +6,23 @@ export default function Main() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
   const calculationRef = useRef<any>();
-
+  const ExtraCupRef = useRef<number>(0);
+  const extraCupChange = () => {
+    let updatedExtraCupChanger = start.extraCup;
+    updatedExtraCupChanger = !updatedExtraCupChanger;
+    changeDispatch("extraCup", updatedExtraCupChanger);
+    changeExtraCupNumber();
+    // extraCupNumber
+    function changeExtraCupNumber() {
+      if (start.extraCup) {
+        changeDispatch("zeroExtraCup", 0);
+        ExtraCupRef.current = 0.4;
+      } else {
+        changeDispatch("200ExtraCup", 0.4);
+        ExtraCupRef.current = 0;
+      }
+    }
+  };
   const handleClick = (number: number) => {
     let updatedSmallCupChanger = [...start.smallCupChanger];
 
@@ -16,10 +32,11 @@ export default function Main() {
         updatedSmallCupChanger[i] = true;
         let changeOne =
           start.litre !== "L" ? ((number + 1) / dataSmallCups.length) * 100 : 0;
-
         let changeTwo =
           start.gender !== ""
-            ? ((number + 1.4) / (dataSmallCups.length + 1)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            ? ((number + 1 + start.extraCupNumber) /
+                (dataSmallCups.length + 0.4)) *
+              100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
@@ -33,7 +50,8 @@ export default function Main() {
             : 0;
         let changeTwo =
           start.gender !== ""
-            ? ((number + 0.4) / (dataSmallCups.length + 1)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            ? ((number + start.extraCupNumber) / (dataSmallCups.length + 0.4)) *
+              100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
@@ -41,11 +59,8 @@ export default function Main() {
     changeDispatch("0", updatedSmallCupChanger);
     changeDispatch("sCClicked", updatedSmallCupChanger);
   };
-  const extraCupChange = () => {
-    let updatedExtraCupChanger = start.extraCup;
-    updatedExtraCupChanger = !updatedExtraCupChanger;
-    changeDispatch("extraCup", updatedExtraCupChanger);
-  };
+
+  console.log(start.extraCupNumber, ExtraCupRef.current);
   const dataSmallCups =
     start.litre === 2
       ? [0, 1, 2, 3]

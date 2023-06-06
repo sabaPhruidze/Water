@@ -16,6 +16,7 @@ type InitialState = {
   smallCupChanger: boolean[];
   extraCup: boolean;
   calculation: number | string;
+  extraCupNumber: any;
 };
 type ActionType = {
   type: string | boolean | number | boolean[];
@@ -33,6 +34,7 @@ const initialState: InitialState = {
   literOrGender: false,
   smallCupChanger: [false, false, false, false],
   extraCup: false,
+  extraCupNumber: 0,
   calculation: -1,
 };
 const reducer = (state: any, action: ActionType) => {
@@ -70,9 +72,11 @@ const reducer = (state: any, action: ActionType) => {
       changes.WarningAppeal = action.payload;
       break;
     case "extraCup":
+      changes.extraCup = action.payload;
+      break;
     case "zeroExtraCup":
     case "200ExtraCup":
-      changes.extraCup = action.payload;
+      changes.extraCupNumber = action.payload;
       break;
     case "0":
       changes.calculation = action.payload;
