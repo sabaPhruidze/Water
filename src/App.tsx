@@ -15,6 +15,7 @@ type InitialState = {
   literOrGender: boolean;
   smallCupChanger: boolean[];
   extraCup: boolean;
+  calculation: number | string;
 };
 type ActionType = {
   type: string | boolean | number | boolean[];
@@ -32,6 +33,7 @@ const initialState: InitialState = {
   literOrGender: false,
   smallCupChanger: [false, false, false, false],
   extraCup: false,
+  calculation: -1,
 };
 const reducer = (state: any, action: ActionType) => {
   const changes = { ...state };
@@ -69,6 +71,9 @@ const reducer = (state: any, action: ActionType) => {
       break;
     case "extraCup":
       changes.extraCup = action.payload;
+      break;
+    case "0":
+      changes.calculation = action.payload;
       break;
     default:
       changes.backgroundColor = "#6efafc";

@@ -155,7 +155,7 @@ h3 {
     justify-content: center;
     background-color: #439de7;
     font-weight: 800;
-    transition: 0.8 ease-in;
+    transition: 0.8 ease;
 }
 .glasses {
     display: flex;
@@ -176,16 +176,16 @@ h3 {
     background-color: rgba(255, 255, 255, 0.9568627451);
     cursor: pointer;
     font-size: 12px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    cursor: pointer;
     transition: 0.5;
     margin: 10px;
 }
 .ML200 {
-    width:25px;
-    height:45px;
+    width:40px;
+    height:75px;
     border-radius:0 0 10px 10px;
+    border:2px solid black;
+    border-top:0;
     display: flex;
     align-items: center;
     justify-content: center;

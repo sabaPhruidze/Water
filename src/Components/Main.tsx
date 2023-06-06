@@ -1,14 +1,35 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
 export default function Main() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
+  const calculationRef = useRef<any>();
 
   const handleClick = (number: number) => {
     let updatedSmallCupChanger = [...start.smallCupChanger];
-    updatedSmallCupChanger[number] = !updatedSmallCupChanger[number];
+
+    if (!updatedSmallCupChanger[number]) {
+      // If the clicked small cup is white, change the background color of small cups with index <= number to blue
+      for (let i = 0; i <= number; i++) {
+        updatedSmallCupChanger[i] = true;
+        let changeOne =
+          start.litre !== "L" ? ((number + 1) / dataSmallCups.length) * 100 : 0;
+        calculationRef.current = changeOne;
+      }
+    } else {
+      // If the clicked small cup is already blue, change its background color to white
+      for (let i = number; i < updatedSmallCupChanger.length; i++) {
+        updatedSmallCupChanger[i] = false;
+        let changeOne =
+          start.litre !== "L" && number !== 0
+            ? (number / dataSmallCups.length) * 100
+            : 0;
+        calculationRef.current = changeOne;
+      }
+    }
+    changeDispatch("0", updatedSmallCupChanger);
     changeDispatch("sCClicked", updatedSmallCupChanger);
   };
   const extraCupChange = () => {
@@ -53,7 +74,14 @@ export default function Main() {
             <h3>{!start.literOrGender ? start.litre : start.gender} L</h3>
             <h4> Remained</h4>
           </div>
-          <div className={Common.percent} style={{ height: 0 }}></div>
+          <div
+            className={Common.percent}
+            style={{
+              height: `${calculationRef.current}%`,
+            }}
+          >
+            {calculationRef.current} %
+          </div>
         </div>
         <h4 style={{ margin: "15px 0 5px 0" }}>
           Select the number of glasses you have drunk
@@ -73,8 +101,8 @@ export default function Main() {
                 : start.gender == 3.7
                 ? 350
                 : start.litre === 5
-                ? "100vw"
-                : "100vw",
+                ? 400
+                : 400,
           }}
         >
           {dataSmallCups.map((data: number, idx: number) => (
