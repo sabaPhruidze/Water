@@ -70,6 +70,8 @@ const reducer = (state: any, action: ActionType) => {
       changes.WarningAppeal = action.payload;
       break;
     case "extraCup":
+    case "zeroExtraCup":
+    case "200ExtraCup":
       changes.extraCup = action.payload;
       break;
     case "0":

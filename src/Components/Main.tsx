@@ -16,7 +16,12 @@ export default function Main() {
         updatedSmallCupChanger[i] = true;
         let changeOne =
           start.litre !== "L" ? ((number + 1) / dataSmallCups.length) * 100 : 0;
-        calculationRef.current = changeOne;
+
+        let changeTwo =
+          start.gender !== ""
+            ? ((number + 1.4) / (dataSmallCups.length + 1)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            : 0;
+        calculationRef.current = changeOne || changeTwo;
       }
     } else {
       // If the clicked small cup is already blue, change its background color to white
@@ -26,7 +31,11 @@ export default function Main() {
           start.litre !== "L" && number !== 0
             ? (number / dataSmallCups.length) * 100
             : 0;
-        calculationRef.current = changeOne;
+        let changeTwo =
+          start.gender !== ""
+            ? ((number + 0.4) / (dataSmallCups.length + 1)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            : 0;
+        calculationRef.current = changeOne || changeTwo;
       }
     }
     changeDispatch("0", updatedSmallCupChanger);
