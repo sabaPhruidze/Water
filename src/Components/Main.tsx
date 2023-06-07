@@ -12,13 +12,21 @@ export default function Main() {
   const extraCupChange = () => {
     let updatedExtraCupChanger = !start.extraCup;
     changeDispatch("extraCup", updatedExtraCupChanger);
+    calculationRef.current =
+      !start.extraCup && calculationRef.current < 90
+        ? calculationRef.current + (0.4 / (dataSmallCups.length + 0.4)) * 100
+        : start.extraCup && calculationRef.current > 5
+        ? calculationRef.current - (0.4 / (dataSmallCups.length + 0.4)) * 100
+        : !start.extraCup && calculationRef.current > 90
+        ? 100
+        : start.extraCup && calculationRef.current < 5
+        ? 0
+        : 0;
   };
 
   const handleClick = (number: number) => {
     let updatedSmallCupChanger = [...start.smallCupChanger];
-    function extra() {
-      return start.extraCup ? 0.4 : 0;
-    }
+
     if (!updatedSmallCupChanger[number]) {
       // If the clicked small cup is white, change the background color of small cups with index <= number to blue
       for (let i = 0; i <= number; i++) {
@@ -27,7 +35,7 @@ export default function Main() {
           start.litre !== "L" ? ((number + 1) / dataSmallCups.length) * 100 : 0;
         let changeTwo =
           start.gender !== ""
-            ? ((number + 1 + extra()) / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            ? ((number + 1) / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
@@ -41,9 +49,7 @@ export default function Main() {
             : 0;
         let changeTwo =
           start.gender !== ""
-            ? ((number + start.extraCupNumber + extra()) /
-                (dataSmallCups.length + 0.4)) *
-              100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            ? (number / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
