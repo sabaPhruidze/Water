@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
@@ -7,25 +7,18 @@ export default function Main() {
   const { start, changeDispatch } = myContext1;
   const calculationRef = useRef<any>();
   const ExtraCupRef = useRef<number>(0);
+  const ExtraCupRefVisually = useRef<number>(0);
+
   const extraCupChange = () => {
-    let updatedExtraCupChanger = start.extraCup;
-    updatedExtraCupChanger = !updatedExtraCupChanger;
+    let updatedExtraCupChanger = !start.extraCup;
     changeDispatch("extraCup", updatedExtraCupChanger);
-    changeExtraCupNumber();
-    // extraCupNumber
-    function changeExtraCupNumber() {
-      if (start.extraCup) {
-        changeDispatch("zeroExtraCup", 0);
-        ExtraCupRef.current = 0.4;
-      } else {
-        changeDispatch("200ExtraCup", 0.4);
-        ExtraCupRef.current = 0;
-      }
-    }
   };
+
   const handleClick = (number: number) => {
     let updatedSmallCupChanger = [...start.smallCupChanger];
-
+    function extra() {
+      return start.extraCup ? 0.4 : 0;
+    }
     if (!updatedSmallCupChanger[number]) {
       // If the clicked small cup is white, change the background color of small cups with index <= number to blue
       for (let i = 0; i <= number; i++) {
@@ -34,9 +27,7 @@ export default function Main() {
           start.litre !== "L" ? ((number + 1) / dataSmallCups.length) * 100 : 0;
         let changeTwo =
           start.gender !== ""
-            ? ((number + 1 + start.extraCupNumber) /
-                (dataSmallCups.length + 0.4)) *
-              100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            ? ((number + 1 + extra()) / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
@@ -50,7 +41,8 @@ export default function Main() {
             : 0;
         let changeTwo =
           start.gender !== ""
-            ? ((number + start.extraCupNumber) / (dataSmallCups.length + 0.4)) *
+            ? ((number + start.extraCupNumber + extra()) /
+                (dataSmallCups.length + 0.4)) *
               100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
             : 0;
         calculationRef.current = changeOne || changeTwo;
@@ -60,7 +52,6 @@ export default function Main() {
     changeDispatch("sCClicked", updatedSmallCupChanger);
   };
 
-  console.log(start.extraCupNumber, ExtraCupRef.current);
   const dataSmallCups =
     start.litre === 2
       ? [0, 1, 2, 3]
@@ -81,7 +72,7 @@ export default function Main() {
       ) : (
         <div
           className={Common.ML200}
-          onClick={() => extraCupChange()}
+          onClick={extraCupChange}
           style={{
             backgroundColor: start.extraCup ? "blue" : "white",
             color: start.extraCup ? "white" : "blue",
@@ -104,7 +95,7 @@ export default function Main() {
               height: `${calculationRef.current}%`,
             }}
           >
-            {calculationRef.current} %
+            {calculationRef.current} {calculationRef.current > 0 ? "%" : ""}
           </div>
         </div>
         <h4 style={{ margin: "15px 0 5px 0" }}>
