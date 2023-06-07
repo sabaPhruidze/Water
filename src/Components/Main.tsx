@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef } from "react";
 import { myContext } from "../App";
 import Common from "./Common.module.css";
 
@@ -6,22 +6,21 @@ export default function Main() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
   const calculationRef = useRef<any>();
-  const ExtraCupRef = useRef<number>(0);
-  const ExtraCupRefVisually = useRef<number>(0);
 
   const extraCupChange = () => {
     let updatedExtraCupChanger = !start.extraCup;
     changeDispatch("extraCup", updatedExtraCupChanger);
     calculationRef.current =
-      !start.extraCup && calculationRef.current < 90
+      !start.extraCup && calculationRef.current < 97
         ? calculationRef.current + (0.4 / (dataSmallCups.length + 0.4)) * 100
         : start.extraCup && calculationRef.current > 5
         ? calculationRef.current - (0.4 / (dataSmallCups.length + 0.4)) * 100
-        : !start.extraCup && calculationRef.current > 90
+        : !start.extraCup && calculationRef.current > 97
         ? 100
         : start.extraCup && calculationRef.current < 5
         ? 0
         : 0;
+    calculationRef.current = parseFloat(calculationRef.current.toFixed(1));
   };
 
   const handleClick = (number: number) => {
@@ -56,6 +55,7 @@ export default function Main() {
     }
     changeDispatch("0", updatedSmallCupChanger);
     changeDispatch("sCClicked", updatedSmallCupChanger);
+    calculationRef.current = parseFloat(calculationRef.current.toFixed(1));
   };
 
   const dataSmallCups =
@@ -91,10 +91,16 @@ export default function Main() {
         <h1>See how many waters You drank</h1>
         <h3>Goal: {!start.literOrGender ? start.litre : start.gender} liter</h3>
         <div className={Common.mainGlass}>
-          <div className={Common.remain}>
-            <h3>{!start.literOrGender ? start.litre : start.gender} L</h3>
-            <h4> Remained</h4>
-          </div>
+          {calculationRef.current > 95 ? (
+            ""
+          ) : (
+            <div className={Common.remain}>
+              <h3>{!start.literOrGender ? start.litre : start.gender} L</h3>
+
+              {calculationRef.current > 80 ? "" : <h4> Remained</h4>}
+            </div>
+          )}
+
           <div
             className={Common.percent}
             style={{
