@@ -125,6 +125,7 @@ export default function Main() {
             className={Common.percent}
             style={{
               height: `${calculationRef.current}%`,
+              visibility: calculationRef.current === -1 ? "hidden" : "visible",
             }}
           >
             {calculationRef.current} {calculationRef.current > 0 ? "%" : ""}
