@@ -33,8 +33,10 @@ export default function Main() {
         let changeOne =
           start.litre !== "L" ? ((number + 1) / dataSmallCups.length) * 100 : 0;
         let changeTwo =
-          start.gender !== ""
-            ? ((number + 1) / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+          start.gender !== "" && start.extraCup
+            ? ((number + 1 + 0.4) / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            : start.gender !== "" && !start.extraCup
+            ? ((number + 1) / (dataSmallCups.length + 0.4)) * 100
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
@@ -47,8 +49,10 @@ export default function Main() {
             ? (number / dataSmallCups.length) * 100
             : 0;
         let changeTwo =
-          start.gender !== ""
+          start.gender !== "" && !start.extraCup
             ? (number / (dataSmallCups.length + 0.4)) * 100 //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            : start.gender !== "" && start.extraCup //0.4 because of the 200 ml. 200ml * 2.5 = 500ml. if (500 ml === 1) then 1 : 2.5 = 0.4
+            ? (number / (dataSmallCups.length + 0.4)) * 100
             : 0;
         calculationRef.current = changeOne || changeTwo;
       }
