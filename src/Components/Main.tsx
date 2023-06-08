@@ -5,7 +5,7 @@ import Common from "./Common.module.css";
 export default function Main() {
   const myContext1 = useContext(myContext);
   const { start, changeDispatch } = myContext1;
-  const calculationRef = useRef<any>();
+  const calculationRef = useRef<any>(-1);
 
   const extraCupChange = () => {
     let updatedExtraCupChanger = !start.extraCup;
@@ -74,7 +74,23 @@ export default function Main() {
       : start.litre === 4
       ? [0, 1, 2, 3, 4, 5, 6, 7]
       : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+  const remainDisplay =
+    !start.literOrGender && calculationRef.current === -1
+      ? start.litre
+      : start.literOrGender && calculationRef.current === -1
+      ? start.gender
+      : !start.literOrGender && calculationRef.current !== -1
+      ? (
+          ((100 - calculationRef.current) * (dataSmallCups.length / 2)) /
+          100
+        ).toFixed(1)
+      : start.literOrGender && calculationRef.current !== -1
+      ? (
+          ((100 - calculationRef.current) *
+            ((dataSmallCups.length + 0.4) / 2)) /
+          100
+        ).toFixed(1)
+      : 0;
   return (
     <>
       {!start.literOrGender ? (
@@ -99,7 +115,7 @@ export default function Main() {
             ""
           ) : (
             <div className={Common.remain}>
-              <h3>{!start.literOrGender ? start.litre : start.gender} L</h3>
+              <h3>{remainDisplay} L</h3>
 
               {calculationRef.current > 80 ? "" : <h4> Remained</h4>}
             </div>
